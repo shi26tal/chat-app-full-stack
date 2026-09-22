@@ -1,11 +1,14 @@
 import os
-from datetime import timedelta
+from datetime import timedelta 
+# timedelta just a way to express 24 hours 
 
+# class holding bunch of settings together
 class Config:
 
+    # os lets python read environment variables
     SECRET_KEY = os.environ.get("SECRET_KEY","dev-secret-change-in-production")
 
-    SQLALCHEMY_DATABASE_URL = os.environ.get("DATABASE_URL","postgresql://chatapp:devpass@localhost:5432/chatapp")
+    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL","postgresql://chatapp:devpass@localhost:5432/chatapp")
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
