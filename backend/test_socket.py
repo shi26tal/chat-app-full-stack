@@ -2,8 +2,7 @@ import socketio
 
 sio = socketio.Client()
 
-TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc5MDIxNzEzNiwianRpIjoiNzdhY2VlNGYtOGE5Yi00MWUxLTgyYWEtNzVhMTM3NWYyZDMyIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjEiLCJuYmYiOjE3OTAyMTcxMzYsImNzcmYiOiI2M2RlODZlMC0zMDdjLTQxNzAtOWYzZC05OTA5YTFlNzRmNjIiLCJleHAiOjE3OTAzMDM1MzZ9.yAqfbUNQnr5ZCoUIPqvH96wydcExTWrbEbEnY1g_DZw"
-
+TOKEN = "TEST_TOKEN"
 
 @sio.event
 def connect():
