@@ -34,6 +34,9 @@ bcrypt==4.1.3
 # lets flast-socketIO handle many concurrent connections efficiently
 eventlet==0.36.1
 
+# validation
+pydantic[email]
+
 # testing
 pytest==8.2.0
 pytest-flask==1.3.0

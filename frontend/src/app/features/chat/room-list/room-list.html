@@ -1,0 +1,130 @@
+<div class="min-h-screen bg-gray-100">
+
+  <!-- Header -->
+  <header class="border-b bg-white">
+    <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+
+      <div>
+        <h1 class="text-2xl font-bold text-gray-900">
+          Chat Rooms
+        </h1>
+
+        <p class="text-sm text-gray-500">
+          Join a room and start chatting
+        </p>
+      </div>
+
+      <button
+        type="button"
+        (click)="logout()"
+        class="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+      >
+        Logout
+      </button>
+
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="mx-auto max-w-6xl px-6 py-8">
+
+    <!-- Create Room -->
+    <div class="mb-8 rounded-2xl bg-white p-6 shadow-sm">
+
+      <h2 class="mb-4 text-lg font-semibold text-gray-900">
+        Create a Room
+      </h2>
+
+      <form
+        (ngSubmit)="createRoom()"
+        class="flex flex-col gap-3 sm:flex-row"
+      >
+
+        <input
+          type="text"
+          name="roomName"
+          [(ngModel)]="newRoomName"
+          placeholder="Enter room name"
+          class="flex-1 rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+        />
+
+        <button
+          type="submit"
+          [disabled]="isCreating"
+          class="rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          {{ isCreating ? 'Creating...' : 'Create Room' }}
+        </button>
+
+      </form>
+
+    </div>
+
+    <!-- Error -->
+    @if (errorMessage) {
+      <div class="mb-6 rounded-lg bg-red-50 px-4 py-3 text-sm text-red-600">
+        {{ errorMessage }}
+      </div>
+    }
+
+    <!-- Loading -->
+    @if (isLoading) {
+      <div class="py-12 text-center text-gray-500">
+        Loading rooms...
+      </div>
+    }
+
+    <!-- Rooms -->
+    @if (!isLoading) {
+
+      @if (rooms.length === 0) {
+
+        <div class="rounded-2xl bg-white p-12 text-center shadow-sm">
+          <h2 class="text-lg font-semibold text-gray-900">
+            No rooms yet
+          </h2>
+
+          <p class="mt-2 text-sm text-gray-500">
+            Create the first room to start chatting.
+          </p>
+        </div>
+
+      } @else {
+
+        <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+
+          @for (room of rooms; track room.id) {
+
+            <div class="rounded-2xl bg-white p-6 shadow-sm">
+
+              <div class="mb-5">
+                <h3 class="text-lg font-semibold text-gray-900">
+                  {{ room.name }}
+                </h3>
+
+                <p class="mt-1 text-sm text-gray-500">
+                  Room #{{ room.id }}
+                </p>
+              </div>
+
+              <button
+                type="button"
+                (click)="joinRoom(room.id)"
+                class="w-full rounded-lg bg-blue-600 px-4 py-3 font-semibold text-white hover:bg-blue-700"
+              >
+                Join Room
+              </button>
+
+            </div>
+
+          }
+
+        </div>
+
+      }
+
+    }
+
+  </main>
+
+</div>

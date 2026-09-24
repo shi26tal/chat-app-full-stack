@@ -1,0 +1,102 @@
+<div class="flex min-h-screen flex-col bg-gray-100">
+
+  <!-- Header -->
+  <header class="border-b bg-white px-6 py-4">
+    <div class="mx-auto flex max-w-4xl items-center justify-between">
+
+      <div>
+        <h1 class="text-xl font-bold text-gray-900">
+          Chat Room #{{ roomId }}
+        </h1>
+
+        <p class="text-sm text-gray-500">
+          Real-time conversation
+        </p>
+      </div>
+
+      <span class="rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-700">
+        Connected
+      </span>
+
+    </div>
+  </header>
+
+  <!-- Messages -->
+  <main class="flex-1 px-4 py-6">
+
+    <div class="mx-auto flex max-w-4xl flex-col gap-3">
+
+      @if (messages.length === 0) {
+
+        <div class="py-16 text-center">
+          <p class="text-gray-500">
+            No messages yet.
+          </p>
+
+          <p class="mt-1 text-sm text-gray-400">
+            Send the first message!
+          </p>
+        </div>
+
+      } @else {
+
+        @for (message of messages; track message.message_id) {
+
+          <div class="rounded-xl bg-white px-4 py-3 shadow-sm">
+
+            <div class="mb-1 flex items-center justify-between gap-4">
+
+              <span class="text-sm font-semibold text-blue-600">
+                User #{{ message.user_id }}
+              </span>
+
+              <span class="text-xs text-gray-400">
+                {{ message.created_at | date:'shortTime' }}
+              </span>
+
+            </div>
+
+            <p class="break-words text-gray-800">
+              {{ message.content }}
+            </p>
+
+          </div>
+
+        }
+
+      }
+
+    </div>
+
+  </main>
+
+  <!-- Message Input -->
+  <footer class="border-t bg-white px-4 py-4">
+
+    <form
+      (ngSubmit)="sendMessage()"
+      class="mx-auto flex max-w-4xl gap-3"
+    >
+
+      <input
+        type="text"
+        name="message"
+        [(ngModel)]="newMessage"
+        placeholder="Type a message..."
+        autocomplete="off"
+        class="flex-1 rounded-xl border border-gray-300 px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+      />
+
+      <button
+        type="submit"
+        [disabled]="!newMessage.trim() || isSending"
+        class="rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+      >
+        Send
+      </button>
+
+    </form>
+
+  </footer>
+
+</div>
